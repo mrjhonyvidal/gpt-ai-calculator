@@ -1,3 +1,4 @@
+import openai 
 import streamlit as st
 import json
 import tiktoken
@@ -107,6 +108,28 @@ def main():
         | {cost_gbp} GBP | {monthly_cost_gbp} GBP |
         """)
 
+    with st.sidebar:
+        openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+
+    st.title("💬 Chatbot") 
+    if "messages" not in st.session_state:
+        st.session_state["messages"] = [{"role": "assistant", "content": "You will be provided with a text in English, and your task is to translate it into French."}]
+
+    for msg in st.session_state.messages:
+        st.chat_message(msg["role"]).write(msg["content"])
+
+    if prompt := st.chat_input():
+        if not openai_api_key:
+            st.info("Please add your OpenAI API key to continue.")
+            st.stop()
+
+        openai.api_key = openai_api_key
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        st.chat_message("user").write(prompt)
+        response = openai.ChatCompletion.create(model=selected_model_name, messages=st.session_state.messages)
+        msg = response.choices[0].message
+        st.session_state.messages.append(msg)
+        st.chat_message("assistant").write(msg.content)
 
 if __name__ == "__main__":
     main()
