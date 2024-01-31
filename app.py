@@ -25,8 +25,8 @@ class APIPricing:
     # split text into USER and ASSISTANT parts
     def split_text(self):
         lines = self.text.split("\n")
-        user_text = []
-        assistant_text = []
+        user_text = [""]
+        assistant_text = ["## ASSISTANT", "You will be provided with a text in English, and your task is to translate it into French."]
         is_user = True
 
         for line in lines:
@@ -53,23 +53,23 @@ class APIPricing:
 
 
 def main():
-    st.markdown("# GPT API Price Calculator")
+    st.markdown("# GTP Calculator")
 
-    st.markdown("""
-    For text input, use the following format to separate user and assistant dialogues:
+    # st.markdown("""
+    # For text input, use the following format to separate user and assistant dialogues:
 
-    * Type "## USER" before the user's dialogue.
-    * Type "## ASSISTANT" before the assistant's dialogue.
+    # * Type "## USER" before the user's dialogue.
+    # * Type "## ASSISTANT" before the assistant's dialogue.
 
-    For example:
-    ```
-    ## USER
-    Hi, how are you?
+    # For example:
+    # ```
+    # ## USER
+    # Text Translated
 
-    ## ASSISTANT
-    I'm doing well, thank you. How can I assist you today?
-    ```
-    """)
+    # ## ASSISTANT
+    # "## USER", "You will be provided with a sentence in English, and your task is to translate it into French."
+    # ```
+    # """)
 
     input_type = st.radio("Input Type", ["Text", "File"])
 
@@ -84,7 +84,7 @@ def main():
     model_names = data.keys()
     selected_model_name = st.selectbox("Select a GPT model", model_names)
 
-    times = st.slider("How many times do you use this service per day?", 1, 100, 10)
+    times = st.slider("How many times the tool is used per day?", 1, 100, 10)
 
     # calculate token count and cost
     if st.button("Calculate"):
@@ -97,14 +97,14 @@ def main():
         cost = api_pricing.calc_cost(text)
         monthly_cost = cost * times * 30
         c = CurrencyRates()
-        cost_jpy = c.convert("USD", "JPY", cost)
-        monthly_cost_jpy = c.convert("USD", "JPY", monthly_cost)
+        cost_gbp = c.convert("USD", "GBP", cost)
+        monthly_cost_gbp = c.convert("USD", "GBP", monthly_cost)
 
         st.markdown(f"""
         | Cost | Monthly Cost |
         | --- | --- |
         | {cost} USD | {monthly_cost} USD |
-        | {cost_jpy} JPY | {monthly_cost_jpy} JPY |
+        | {cost_gbp} GBP | {monthly_cost_gbp} GBP |
         """)
 
 
