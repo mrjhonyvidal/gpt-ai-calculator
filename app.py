@@ -1,4 +1,4 @@
-import openai 
+import openai
 import streamlit as st
 import json
 import tiktoken
@@ -113,7 +113,9 @@ def main():
 
     st.title("💬 Chatbot") 
     if "messages" not in st.session_state:
-        st.session_state["messages"] = [{"role": "assistant", "content": "You will be provided with a text in English, and your task is to translate it into French."}]
+        st.session_state["messages"] = [
+                {"role": "assistant", "content": "Translate the following English text to French."}
+            ]
 
     for msg in st.session_state.messages:
         st.chat_message(msg["role"]).write(msg["content"])
@@ -126,7 +128,7 @@ def main():
         openai.api_key = openai_api_key
         st.session_state.messages.append({"role": "user", "content": prompt})
         st.chat_message("user").write(prompt)
-        response = openai.ChatCompletion.create(model=selected_model_name, messages=st.session_state.messages)
+        response = openai.chat.completions.create(model=selected_model_name, messages=st.session_state.messages)
         msg = response.choices[0].message
         st.session_state.messages.append(msg)
         st.chat_message("assistant").write(msg.content)
