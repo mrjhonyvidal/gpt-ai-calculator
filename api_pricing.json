@@ -3,7 +3,7 @@
         "prompt_price": "0.002",
         "completion_price": "0.002"
     },
-    "gpt-4-8k": {
+    "gpt-4": {
         "prompt_price": "0.03",
         "completion_price": "0.06"
     },
