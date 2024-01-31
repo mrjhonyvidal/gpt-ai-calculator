@@ -1,3 +1,5 @@
 streamlit
 tiktoken
 forex-python
+openai>=1.2
+langchain>=0.0.217
