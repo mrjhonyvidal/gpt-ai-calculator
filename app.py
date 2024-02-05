@@ -89,24 +89,27 @@ def main():
 
     # calculate token count and cost
     if st.button("Calculate"):
-        if input_type == "Text":
-            text = input_text
-        else:
-            text = input_file.read().decode("utf-8")
+        try:
+            if input_type == "Text":
+                text = input_text
+            else:
+                text = input_file.read().decode("utf-8")
 
-        api_pricing = APIPricing(selected_model_name)
-        cost = api_pricing.calc_cost(text)
-        monthly_cost = cost * times * 30
-        c = CurrencyRates()
-        cost_gbp = c.convert("USD", "GBP", cost)
-        monthly_cost_gbp = c.convert("USD", "GBP", monthly_cost)
+            api_pricing = APIPricing(selected_model_name)
+            cost = api_pricing.calc_cost(text)
+            monthly_cost = cost * times * 30
+            c = CurrencyRates()
+            cost_gbp = c.convert("USD", "GBP", cost)
+            monthly_cost_gbp = c.convert("USD", "GBP", monthly_cost)
 
-        st.markdown(f"""
-        | Cost | Monthly Cost |
-        | --- | --- |
-        | {cost} USD | {monthly_cost} USD |
-        | {cost_gbp} GBP | {monthly_cost_gbp} GBP |
-        """)
+            st.markdown(f"""
+            | Cost | Monthly Cost |
+            | --- | --- |
+            | {cost} USD | {monthly_cost} USD |
+            | {cost_gbp} GBP | {monthly_cost_gbp} GBP |
+            """)
+        except Exception as e:
+            st.error(f"An error occurred: {e}")   
 
     with st.sidebar:
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
@@ -125,13 +128,16 @@ def main():
             st.info("Please add your OpenAI API key to continue.")
             st.stop()
 
-        openai.api_key = openai_api_key
-        st.session_state.messages.append({"role": "user", "content": prompt})
-        st.chat_message("user").write(prompt)
-        response = openai.chat.completions.create(model=selected_model_name, messages=st.session_state.messages)
-        msg = response.choices[0].message.content
-        st.session_state.messages.append({"role": "assistant", "content": msg})
-        st.chat_message("assistant").write(msg)
+        try:
+            openai.api_key = openai_api_key
+            st.session_state.messages.append({"role": "user", "content": prompt})
+            st.chat_message("user").write(prompt)
+            response = openai.chat.completions.create(model=selected_model_name, messages=st.session_state.messages)
+            msg = response.choices[0].message.content
+            st.session_state.messages.append({"role": "assistant", "content": msg})
+            st.chat_message("assistant").write(msg)
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
