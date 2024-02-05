@@ -56,28 +56,38 @@ class APIPricing:
 def main():
     st.markdown("# GTP Calculator")
 
-    st.markdown("""
-    Use the following tool to calculate the cost of using the OpenAI to translate text from English to different languages.
-    ```
-    """)
+    # st.markdown("""
+    # For text input, use the following format to separate user and assistant dialogues:
+
+    # * Type "## USER" before the user's dialogue.
+    # * Type "## ASSISTANT" before the assistant's dialogue.
+
+    # For example:
+    # ```
+    # ## USER
+    # Text Translated
+
+    # ## ASSISTANT
+    # "## USER", "You will be provided with a sentence in English, and your task is to translate it into French."
+    # ```
+    # """)
 
     input_type = st.radio("Input Type", ["Text", "File"])
 
-    # Add logo to the sidebar
-    # st.markdown(
-    #     f"""
-    #         <style>
-    #             [data-testid="stSidebar"] {{
-    #                 background-image: url();
-    #                 background-repeat: no-repeat;
-    #                 padding-top: 80px;
-    #                 background-position: center;
-    #                 background-size: contain;
-    #             }}
-    #         </style>
-    #         """,
-    #     unsafe_allow_html=True,
-    # )
+    st.markdown(
+        f"""
+            <style>
+                [data-testid="stSidebar"] {{
+                    background-image: url();
+                    background-repeat: no-repeat;
+                    padding-top: 80px;
+                    background-position: center;
+                    background-size: contain;
+                }}
+            </style>
+            """,
+        unsafe_allow_html=True,
+    )
 
     if input_type == "Text":
         input_text = st.text_area("Input Text")
@@ -116,37 +126,40 @@ def main():
         except Exception as e:
             st.error(f"An error occurred: {e}") 
 
-  
+    language_prompts = {
+            "German": "Translate the following English text to German.",
+            "French": "Translate the following English text to French.",
+            "Spanish Mexico": "Translate the following English text to Spanish Mexico.",
+            "Spanish Neutral": "Translate the following English text to Spanish Neutral.",
+            "Spanish Spain": "Translate the following English text to Spanish Spain.",
+            "Portuguese": "Translate the following English text to Portuguese.",
+            "Italian": "Translate the following English text to Italian.",
+            "Japanese": "Translate the following English text to Japanese.",
+            "English Australia": "Translate the following English text to English Australia.",
+            "English US": "Translate the following English text to English US."
+    }  
 
     with st.sidebar:
-        openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys", value="", disabled=True)
+        openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys")
 
     st.title("AI Translator Beta")
-    with open("languages_prompt.json", "r") as f:
-        lang = json.load(f)
-    languages_prompt = list(lang.keys())
-
-    #  hardcoding the language prompt
-    #  language_prompt = {
-    #     "German": "Translate the following English text to German.",
-    #     "French": "Translate the following English text to French.",
-    #     "Spanish": "Translate the following English text to Spanish.",
-    # }  
-
-    selected_language_to = st.selectbox("Select a Language", languages_prompt)
+    # with open("languages_.json", "r") as f:
+    #     lang = json.load(f)
+    # languages_available = lang.keys()
+    selected_language_to = st.selectbox("Select a Language", language_prompts.keys())
 
     if "messages" not in st.session_state:
         st.session_state["messages"] = []
 
     if st.session_state["messages"]:
         # Update the assistant prompt based on the selected language
-        st.session_state["messages"][0]["content"] = languages_prompt[selected_language_to]
+        st.session_state["messages"][0]["content"] = language_prompts[selected_language_to]
     else:
-        initial_prompt = languages_prompt[selected_language_to]
+        initial_prompt = language_prompts[selected_language_to]
         st.session_state["messages"].append({"role": "assistant", "content": initial_prompt})
 
     if "messages" not in st.session_state:
-        initial_prompt = languages_prompt[selected_language_to]
+        initial_prompt = language_prompts[selected_language_to]
         st.session_state["messages"] = [
                 {"role": "assistant", "content":initial_prompt},
             ]
@@ -154,9 +167,8 @@ def main():
     for msg in st.session_state.messages:
         st.chat_message(msg["role"]).write(msg["content"])
 
-    openai_api_key = st.secrets["OPENAPI_TOKEN"]
-
     if prompt := st.chat_input():
+        openai_api_key = st.secrets["OPENAI_TOKEN"]
         if not openai_api_key:
             st.info("Please add your OpenAI API key to continue.")
             st.stop()
