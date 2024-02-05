@@ -114,10 +114,10 @@ def main():
     with st.sidebar:
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
 
-    st.title("💬 Chatbot") 
+    st.title("AI Translator Beta") 
     if "messages" not in st.session_state:
         st.session_state["messages"] = [
-                {"role": "assistant", "content": "Translate the following English text to French."}
+                {"role": "assistant", "content": "Translate the following English text to French. DO NOT anything that is not in the original text."},
             ]
 
     for msg in st.session_state.messages:
