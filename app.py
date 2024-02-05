@@ -74,6 +74,20 @@ def main():
 
     input_type = st.radio("Input Type", ["Text", "File"])
 
+    st.markdown(
+        f"""
+            <style>
+                [data-testid="stSidebar"] {{
+                    background-image: url(http://placekitten.com/120/120);
+                    background-repeat: no-repeat;
+                    padding-top: 80px;
+                    background-position: 20px 20px;
+                }}
+            </style>
+            """,
+        unsafe_allow_html=True,
+    )
+
     if input_type == "Text":
         input_text = st.text_area("Input Text")
     else:
