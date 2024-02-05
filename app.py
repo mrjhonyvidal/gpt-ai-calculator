@@ -126,33 +126,37 @@ def main():
         except Exception as e:
             st.error(f"An error occurred: {e}") 
 
-    language_prompts = {
-        "German": "Translate the following English text to German.",
-        "French": "Translate the following English text to French.",
-        "Spanish": "Translate the following English text to Spanish.",
-    }  
+  
 
     with st.sidebar:
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
 
     st.title("AI Translator Beta")
-    # with open("languages_available.json", "r") as f:
-    #     lang = json.load(f)
-    # languages_available = lang.keys()
-    selected_language_to = st.selectbox("Select a Language", language_prompts.keys())
+    with open("languages_prompt.json", "r") as f:
+        lang = json.load(f)
+    languages_prompt = lang.keys()
+
+    #  hardcoding the language prompt
+    #  language_prompt = {
+    #     "German": "Translate the following English text to German.",
+    #     "French": "Translate the following English text to French.",
+    #     "Spanish": "Translate the following English text to Spanish.",
+    # }  
+
+    selected_language_to = st.selectbox("Select a Language", languages_prompt.keys())
 
     if "messages" not in st.session_state:
         st.session_state["messages"] = []
 
     if st.session_state["messages"]:
         # Update the assistant prompt based on the selected language
-        st.session_state["messages"][0]["content"] = language_prompts[selected_language_to]
+        st.session_state["messages"][0]["content"] = languages_prompt[selected_language_to]
     else:
-        initial_prompt = language_prompts[selected_language_to]
+        initial_prompt = languages_prompt[selected_language_to]
         st.session_state["messages"].append({"role": "assistant", "content": initial_prompt})
 
     if "messages" not in st.session_state:
-        initial_prompt = language_prompts[selected_language_to]
+        initial_prompt = languages_prompt[selected_language_to]
         st.session_state["messages"] = [
                 {"role": "assistant", "content":initial_prompt},
             ]
