@@ -143,7 +143,7 @@ def main():
     #     "Spanish": "Translate the following English text to Spanish.",
     # }  
 
-    selected_language_to = st.selectbox("Select a Language", languages_prompt.keys())
+    selected_language_to = st.selectbox("Select a Language", languages_prompt)
 
     if "messages" not in st.session_state:
         st.session_state["messages"] = []
