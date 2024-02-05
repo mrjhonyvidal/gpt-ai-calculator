@@ -124,7 +124,7 @@ def main():
     st.title("AI Translator Beta")
     with open("languages_prompt.json", "r") as f:
         lang = json.load(f)
-    languages_prompt = lang.keys()
+    languages_prompt = list(lang.keys())
 
     #  hardcoding the language prompt
     #  language_prompt = {
