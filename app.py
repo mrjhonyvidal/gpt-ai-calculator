@@ -78,7 +78,7 @@ def main():
         f"""
             <style>
                 [data-testid="stSidebar"] {{
-                    background-image: url(http://placekitten.com/120/120);
+                    background-image: url(https://www.agoramodels.com/site/templates/images/logo.svg);
                     background-repeat: no-repeat;
                     padding-top: 80px;
                     background-position: 20px 20px;
