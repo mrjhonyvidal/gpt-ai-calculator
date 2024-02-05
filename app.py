@@ -114,10 +114,15 @@ def main():
     with st.sidebar:
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
 
-    st.title("AI Translator Beta") 
+    st.title("AI Translator Beta")
+    with open("languages_available.json", "r") as f:
+        lang = json.load(f)
+    languages_available = lang.keys()
+    selected_language_to = st.selectbox("Select a Language", languages_available)
+
     if "messages" not in st.session_state:
         st.session_state["messages"] = [
-                {"role": "assistant", "content": "Translate the following English text to French. DO NOT anything that is not in the original text."},
+                {"role": "assistant", "content": "Translate the following English text to" . selected_language_to},
             ]
 
     for msg in st.session_state.messages:
