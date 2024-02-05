@@ -77,7 +77,7 @@ def main():
     if input_type == "Text":
         input_text = st.text_area("Input Text")
     else:
-        input_file = st.file_uploader("Input File")
+        input_file = st.file_uploader("Input File (It must be a .txt file)")
 
     # model selection
     with open("api_pricing.json", "r") as f:
