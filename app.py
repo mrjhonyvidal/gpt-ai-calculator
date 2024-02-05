@@ -127,6 +127,16 @@ def main():
     selected_language_to = st.selectbox("Select a Language", language_prompts.keys())
 
     if "messages" not in st.session_state:
+        st.session_state["messages"] = []
+
+    if st.session_state["messages"]:
+        # Update the assistant prompt based on the selected language
+        st.session_state["messages"][0]["content"] = language_prompts[selected_language_to]
+    else:
+        initial_prompt = language_prompts[selected_language_to]
+        st.session_state["messages"].append({"role": "assistant", "content": initial_prompt})
+
+    if "messages" not in st.session_state:
         initial_prompt = language_prompts[selected_language_to]
         st.session_state["messages"] = [
                 {"role": "assistant", "content":initial_prompt},
