@@ -119,7 +119,7 @@ def main():
   
 
     with st.sidebar:
-        openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys", value="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", disabled=True)
+        openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys", value="", disabled=True)
 
     st.title("AI Translator Beta")
     with open("languages_prompt.json", "r") as f:
@@ -153,6 +153,8 @@ def main():
 
     for msg in st.session_state.messages:
         st.chat_message(msg["role"]).write(msg["content"])
+
+    openai_api_key = st.secrets["OPENAPI_TOKEN"]
 
     if prompt := st.chat_input():
         if not openai_api_key:
