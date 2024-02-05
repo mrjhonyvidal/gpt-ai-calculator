@@ -119,7 +119,7 @@ def main():
   
 
     with st.sidebar:
-        openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+        openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys", value="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", disabled=True)
 
     st.title("AI Translator Beta")
     with open("languages_prompt.json", "r") as f:
