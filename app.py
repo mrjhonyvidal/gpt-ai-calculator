@@ -58,11 +58,6 @@ def main():
 
     st.markdown("""
     Use the following tool to calculate the cost of using the OpenAI to translate text from English to different languages.
-
-    Models available:
-    * GPT 3 Turbo
-    * GPT 4.
-
     ```
     """)
 
