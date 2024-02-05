@@ -80,7 +80,7 @@ def main():
                 [data-testid="stSidebar"] {{
                     background-image: url(https://www.agoramodels.com/site/templates/images/logo.svg);
                     background-repeat: no-repeat;
-                    padding-top: 80px;
+                    padding: 80px;
                     background-position: 20px 20px;
                 }}
             </style>
