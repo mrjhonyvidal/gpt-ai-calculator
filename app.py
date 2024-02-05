@@ -81,7 +81,8 @@ def main():
                     background-image: url(https://www.agoramodels.com/site/templates/images/logo.svg);
                     background-repeat: no-repeat;
                     padding-top: 80px;
-                    background-position: 40px;
+                    background-position: center;
+                    background-size: contain;
                 }}
             </style>
             """,
