@@ -56,38 +56,33 @@ class APIPricing:
 def main():
     st.markdown("# GTP Calculator")
 
-    # st.markdown("""
-    # For text input, use the following format to separate user and assistant dialogues:
+    st.markdown("""
+    Use the following tool to calculate the cost of using the OpenAI to translate text from English to different languages.
 
-    # * Type "## USER" before the user's dialogue.
-    # * Type "## ASSISTANT" before the assistant's dialogue.
+    Models available:
+    * GPT 3 Turbo
+    * GPT 4.
 
-    # For example:
-    # ```
-    # ## USER
-    # Text Translated
-
-    # ## ASSISTANT
-    # "## USER", "You will be provided with a sentence in English, and your task is to translate it into French."
-    # ```
-    # """)
+    ```
+    """)
 
     input_type = st.radio("Input Type", ["Text", "File"])
 
-    st.markdown(
-        f"""
-            <style>
-                [data-testid="stSidebar"] {{
-                    background-image: url(https://www.agoramodels.com/site/templates/images/logo.svg);
-                    background-repeat: no-repeat;
-                    padding-top: 80px;
-                    background-position: center;
-                    background-size: contain;
-                }}
-            </style>
-            """,
-        unsafe_allow_html=True,
-    )
+    # Add logo to the sidebar
+    # st.markdown(
+    #     f"""
+    #         <style>
+    #             [data-testid="stSidebar"] {{
+    #                 background-image: url();
+    #                 background-repeat: no-repeat;
+    #                 padding-top: 80px;
+    #                 background-position: center;
+    #                 background-size: contain;
+    #             }}
+    #         </style>
+    #         """,
+    #     unsafe_allow_html=True,
+    # )
 
     if input_type == "Text":
         input_text = st.text_area("Input Text")
