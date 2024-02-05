@@ -127,8 +127,9 @@ def main():
     selected_language_to = st.selectbox("Select a Language", language_prompts.keys())
 
     if "messages" not in st.session_state:
+        initial_prompt = language_prompts[selected_language_to]
         st.session_state["messages"] = [
-                {"role": "assistant", "content":language_prompts[selected_language_to]},
+                {"role": "assistant", "content":initial_prompt},
             ]
 
     for msg in st.session_state.messages:
