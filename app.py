@@ -109,20 +109,26 @@ def main():
             | {cost_gbp} GBP | {monthly_cost_gbp} GBP |
             """)
         except Exception as e:
-            st.error(f"An error occurred: {e}")   
+            st.error(f"An error occurred: {e}") 
+
+    language_prompts = {
+        "German": "Translate the following English text to German.",
+        "French": "Translate the following English text to French.",
+        "Spanish": "Translate the following English text to Spanish.",
+    }  
 
     with st.sidebar:
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
 
     st.title("AI Translator Beta")
-    with open("languages_available.json", "r") as f:
-        lang = json.load(f)
-    languages_available = lang.keys()
-    selected_language_to = st.selectbox("Select a Language", languages_available)
+    # with open("languages_available.json", "r") as f:
+    #     lang = json.load(f)
+    # languages_available = lang.keys()
+    selected_language_to = st.selectbox("Select a Language", language_prompts.keys())
 
     if "messages" not in st.session_state:
         st.session_state["messages"] = [
-                {"role": "assistant", "content": f"Translate the following English text to {selected_language_to}"},
+                {"role": "assistant", "content":language_prompts[selected_language_to]},
             ]
 
     for msg in st.session_state.messages:
