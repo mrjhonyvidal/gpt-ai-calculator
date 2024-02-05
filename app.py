@@ -122,7 +122,7 @@ def main():
 
     if "messages" not in st.session_state:
         st.session_state["messages"] = [
-                {"role": "assistant", "content": "Translate the following English text to" . selected_language_to},
+                {"role": "assistant", "content": "Translate the following English text to {selected_language_to}"},
             ]
 
     for msg in st.session_state.messages:
