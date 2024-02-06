@@ -143,7 +143,8 @@ def main():
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys", value="******************")
 
         st.markdown("---")
-        st.markdown("Developed by Jhony Vidal")
+        st.markdown("v.0.1-beta")
+        st.markdown("By Jhony Vidal")
 
     st.title("AI Translator Beta")
     # with open("languages_.json", "r") as f:
