@@ -142,6 +142,9 @@ def main():
     with st.sidebar:
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys", value="******************")
 
+        st.markdown("---")
+        st.markdown("Developed by Jhony Vidal")
+
     st.title("AI Translator Beta")
     # with open("languages_.json", "r") as f:
     #     lang = json.load(f)
@@ -178,6 +181,19 @@ def main():
             st.session_state.messages.append({"role": "user", "content": prompt})
             st.chat_message("user").write(prompt)
             response = openai.chat.completions.create(model=selected_model_name, messages=st.session_state.messages)
+
+            ## TO-DO: add hyperparameters to the API call
+            # response = openai.ChatCompletion.create(
+            #     model=selected_model_name,
+            #     messages=st.session_state.messages,
+            #     max_tokens=150,
+            #     temperature=0.7,
+            #     top_p=1,
+            #     frequency_penalty=0,
+            #     presence_penalty=0,
+            #     stop=["## ASSISTANT"]
+            # )
+
             msg = response.choices[0].message.content
             st.session_state.messages.append({"role": "assistant", "content": msg})
             st.chat_message("assistant").write(msg)
