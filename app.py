@@ -100,7 +100,7 @@ def main():
     model_names = data.keys()
     selected_model_name = st.selectbox("Select a GPT model", model_names)
 
-    times = st.slider("How many times the tool is used per day?", 1, 100, 10)
+    times = st.slider("How many times the API is used per day?", 1, 100, 10)
 
     # calculate token count and cost
     if st.button("Calculate"):
