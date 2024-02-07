@@ -126,18 +126,18 @@ def main():
         except Exception as e:
             st.error(f"An error occurred: {e}") 
 
-    language_prompts = {
-            "German": "Translate the following English text to German.",
-            "French": "Translate the following English text to French.",
-            "Spanish Mexico": "Translate the following English text to Spanish Mexico.",
-            "Spanish Neutral": "Translate the following English text to Spanish Neutral.",
-            "Spanish Spain": "Translate the following English text to Spanish Spain.",
-            "Portuguese": "Translate the following English text to Portuguese.",
-            "Italian": "Translate the following English text to Italian.",
-            "Japanese": "Translate the following English text to Japanese.",
-            "English Australia": "Translate the following English text to English Australia.",
-            "English US": "Translate the following English text to English US."
-    }  
+    # language_prompts = {
+    #         "German": "Translate the following English text to German.",
+    #         "French": "Translate the following English text to French.",
+    #         "Spanish Mexico": "Translate the following English text to Spanish Mexico.",
+    #         "Spanish Neutral": "Translate the following English text to Spanish Neutral.",
+    #         "Spanish Spain": "Translate the following English text to Spanish Spain.",
+    #         "Portuguese": "Translate the following English text to Portuguese.",
+    #         "Italian": "Translate the following English text to Italian.",
+    #         "Japanese": "Translate the following English text to Japanese.",
+    #         "English Australia": "Translate the following English text to English Australia.",
+    #         "English US": "Translate the following English text to English US."
+    # }  
 
     with st.sidebar:
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys", value="******************")
@@ -146,60 +146,60 @@ def main():
         st.markdown("v.0.1-beta")
         st.markdown("By [Jhony Vidal](https://github.com/mrjhonyvidal)")
 
-    st.title("AI Translator Beta")
+    # st.title("AI Translator Beta")
     # with open("languages_.json", "r") as f:
     #     lang = json.load(f)
     # languages_available = lang.keys()
-    selected_language_to = st.selectbox("Select a Language", language_prompts.keys())
+    # selected_language_to = st.selectbox("Select a Language", language_prompts.keys())
 
-    if "messages" not in st.session_state:
-        st.session_state["messages"] = []
+    # if "messages" not in st.session_state:
+    #     st.session_state["messages"] = []
 
-    if st.session_state["messages"]:
-        # Update the assistant prompt based on the selected language
-        st.session_state["messages"][0]["content"] = language_prompts[selected_language_to]
-    else:
-        initial_prompt = language_prompts[selected_language_to]
-        st.session_state["messages"].append({"role": "assistant", "content": initial_prompt})
+    # if st.session_state["messages"]:
+    #     # Update the assistant prompt based on the selected language
+    #     st.session_state["messages"][0]["content"] = language_prompts[selected_language_to]
+    # else:
+    #     initial_prompt = language_prompts[selected_language_to]
+    #     st.session_state["messages"].append({"role": "assistant", "content": initial_prompt})
 
-    if "messages" not in st.session_state:
-        initial_prompt = language_prompts[selected_language_to]
-        st.session_state["messages"] = [
-                {"role": "assistant", "content":initial_prompt},
-            ]
+    # if "messages" not in st.session_state:
+    #     initial_prompt = language_prompts[selected_language_to]
+    #     st.session_state["messages"] = [
+    #             {"role": "assistant", "content":initial_prompt},
+    #         ]
 
-    for msg in st.session_state.messages:
-        st.chat_message(msg["role"]).write(msg["content"])
+    # for msg in st.session_state.messages:
+    #     st.chat_message(msg["role"]).write(msg["content"])
 
-    if prompt := st.chat_input():
-        openai_api_key = st.secrets["OPENAI_TOKEN"]
-        if not openai_api_key:
-            st.info("Please add your OpenAI API key to continue.")
-            st.stop()
+    # if prompt := st.chat_input():
+    #     openai_api_key = st.secrets["OPENAI_TOKEN"]
+    #     if not openai_api_key:
+    #         st.info("Please add your OpenAI API key to continue.")
+    #         st.stop()
 
-        try:
-            openai.api_key = openai_api_key
-            st.session_state.messages.append({"role": "user", "content": prompt})
-            st.chat_message("user").write(prompt)
-            response = openai.chat.completions.create(model=selected_model_name, messages=st.session_state.messages)
+    #     try:
+    #         openai.api_key = openai_api_key
+    #         st.session_state.messages.append({"role": "user", "content": prompt})
+    #         st.chat_message("user").write(prompt)
+    #         response = openai.chat.completions.create(model=selected_model_name, messages=st.session_state.messages)
 
-            ## TO-DO: add hyperparameters to the API call
-            # response = openai.ChatCompletion.create(
-            #     model=selected_model_name,
-            #     messages=st.session_state.messages,
-            #     max_tokens=150,
-            #     temperature=0.7,
-            #     top_p=1,
-            #     frequency_penalty=0,
-            #     presence_penalty=0,
-            #     stop=["## ASSISTANT"]
-            # )
+    #         ## TO-DO: add hyperparameters to the API call
+    #         # response = openai.ChatCompletion.create(
+    #         #     model=selected_model_name,
+    #         #     messages=st.session_state.messages,
+    #         #     max_tokens=150,
+    #         #     temperature=0.7,
+    #         #     top_p=1,
+    #         #     frequency_penalty=0,
+    #         #     presence_penalty=0,
+    #         #     stop=["## ASSISTANT"]
+    #         # )
 
-            msg = response.choices[0].message.content
-            st.session_state.messages.append({"role": "assistant", "content": msg})
-            st.chat_message("assistant").write(msg)
-        except Exception as e:
-            st.error(f"An error occurred: {e}")
+    #         msg = response.choices[0].message.content
+    #         st.session_state.messages.append({"role": "assistant", "content": msg})
+    #         st.chat_message("assistant").write(msg)
+    #     except Exception as e:
+    #         st.error(f"An error occurred: {e}")
 
 if __name__ == "__main__":
     main()
