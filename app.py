@@ -144,7 +144,7 @@ def main():
 
         st.markdown("---")
         st.markdown("v.0.1-beta")
-        st.markdown("By [Jhony Vidal](https://github.com/mrjhonyvidal)")
+        st.markdown("By [Warp Design](https://warp-design.co.uk/)")
 
     st.title("AI Translator Beta")
     # with open("languages_.json", "r") as f:
