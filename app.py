@@ -74,20 +74,20 @@ def main():
 
     input_type = st.radio("Input Type", ["Text", "File"])
 
-    st.markdown(
-        f"""
-            <style>
-                [data-testid="stSidebar"] {{
-                    background-image: url(https://www.agoramodels.com/site/templates/images/logo.svg);
-                    background-repeat: no-repeat;
-                    padding-top: 80px;
-                    background-position: center;
-                    background-size: contain;
-                }}
-            </style>
-            """,
-        unsafe_allow_html=True,
-    )
+    # st.markdown(
+    #     f"""
+    #         <style>
+    #             [data-testid="stSidebar"] {{
+    #                 background-image: url(https://www.agoramodels.com/site/templates/images/logo.svg);
+    #                 background-repeat: no-repeat;
+    #                 padding-top: 80px;
+    #                 background-position: center;
+    #                 background-size: contain;
+    #             }}
+    #         </style>
+    #         """,
+    #     unsafe_allow_html=True,
+    # )
 
     if input_type == "Text":
         input_text = st.text_area("Input Text")
