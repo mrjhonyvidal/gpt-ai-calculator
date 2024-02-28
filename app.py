@@ -103,28 +103,28 @@ def main():
     times = st.slider("How many times the API is used per day?", 1, 100, 10)
 
     # calculate token count and cost
-    if st.button("Calculate"):
-        try:
-            if input_type == "Text":
-                text = input_text
-            else:
-                text = input_file.read().decode("utf-8")
+    # if st.button("Calculate"):
+    #     try:
+    #         if input_type == "Text":
+    #             text = input_text
+    #         else:
+    #             text = input_file.read().decode("utf-8")
 
-            api_pricing = APIPricing(selected_model_name)
-            cost = api_pricing.calc_cost(text)
-            monthly_cost = cost * times * 30
-            c = CurrencyRates()
-            cost_gbp = c.convert("USD", "GBP", cost)
-            monthly_cost_gbp = c.convert("USD", "GBP", monthly_cost)
+    #         api_pricing = APIPricing(selected_model_name)
+    #         cost = api_pricing.calc_cost(text)
+    #         monthly_cost = cost * times * 30
+    #         c = CurrencyRates()
+    #         cost_gbp = c.convert("USD", "GBP", cost)
+    #         monthly_cost_gbp = c.convert("USD", "GBP", monthly_cost)
 
-            st.markdown(f"""
-            | Cost | Monthly Cost |
-            | --- | --- |
-            | {cost} USD | {monthly_cost} USD |
-            | {cost_gbp} GBP | {monthly_cost_gbp} GBP |
-            """)
-        except Exception as e:
-            st.error(f"An error occurred: {e}") 
+    #         st.markdown(f"""
+    #         | Cost | Monthly Cost |
+    #         | --- | --- |
+    #         | {cost} USD | {monthly_cost} USD |
+    #         | {cost_gbp} GBP | {monthly_cost_gbp} GBP |
+    #         """)
+    #     except Exception as e:
+    #         st.error(f"An error occurred: {e}") 
 
     language_prompts = {
             "German": "Translate the following English text to German.",
@@ -146,7 +146,7 @@ def main():
         st.markdown("v.0.1-beta")
         # st.markdown("By [Jhony Vidal](https://github.com/mrjhonyvidal)")
 
-    st.title("AI Translator Beta")
+    st.title("AI Translator")
     # with open("languages_.json", "r") as f:
     #     lang = json.load(f)
     # languages_available = lang.keys()
