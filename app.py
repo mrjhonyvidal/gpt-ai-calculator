@@ -54,7 +54,7 @@ class APIPricing:
 
 
 def main():
-    st.markdown("# GTP Calculator")
+    # st.markdown("# GTP Calculator")
 
     # st.markdown("""
     # For text input, use the following format to separate user and assistant dialogues:
@@ -72,7 +72,7 @@ def main():
     # ```
     # """)
 
-    input_type = st.radio("Input Type", ["Text", "File"])
+    # input_type = st.radio("Input Type", ["Text", "File"])
 
     # st.markdown(
     #     f"""
@@ -89,18 +89,18 @@ def main():
     #     unsafe_allow_html=True,
     # )
 
-    if input_type == "Text":
-        input_text = st.text_area("Input Text")
-    else:
-        input_file = st.file_uploader("Input File (It must be a .txt file)")
+    # if input_type == "Text":
+    #     input_text = st.text_area("Input Text")
+    # else:
+    #     input_file = st.file_uploader("Input File (It must be a .txt file)")
 
     # model selection
-    with open("api_pricing.json", "r") as f:
-        data = json.load(f)
-    model_names = data.keys()
+    # with open("api_pricing.json", "r") as f:
+    #     data = json.load(f)
+    # model_names = data.keys()
     selected_model_name = st.selectbox("Select a GPT model", model_names)
 
-    times = st.slider("How many times the API is used per day?", 1, 100, 10)
+    # times = st.slider("How many times the API is used per day?", 1, 100, 10)
 
     # calculate token count and cost
     # if st.button("Calculate"):
