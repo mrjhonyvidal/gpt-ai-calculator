@@ -95,9 +95,9 @@ def main():
     #     input_file = st.file_uploader("Input File (It must be a .txt file)")
 
     # model selection
-    # with open("api_pricing.json", "r") as f:
-    #     data = json.load(f)
-    # model_names = data.keys()
+    with open("api_pricing.json", "r") as f:
+        data = json.load(f)
+    model_names = data.keys()
     selected_model_name = st.selectbox("Select a GPT model", model_names)
 
     # times = st.slider("How many times the API is used per day?", 1, 100, 10)
