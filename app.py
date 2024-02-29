@@ -153,12 +153,12 @@ def main():
     }
         
 
-    with st.sidebar:
-        openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys", value="******************")
+    # with st.sidebar:
+    #     openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys", value="******************")
 
-        st.markdown("---")
-        st.markdown("v.0.1-beta")
-        # st.markdown("By [Warp Design](https://warp-design.co.uk/)")
+    #     st.markdown("---")
+    #     st.markdown("v.0.1-beta")
+    #     # st.markdown("By [Warp Design](https://warp-design.co.uk/)")
 
     st.title("AI Translator")
     # with open("languages_.json", "r") as f:
