@@ -126,18 +126,32 @@ def main():
     #     except Exception as e:
     #         st.error(f"An error occurred: {e}") 
 
+    # language_prompts = {
+    #         "German": "Translate the following English text to German.",
+    #         "French": "Translate the following English text to French.",
+    #         "Spanish Mexico": "Translate the following English text to Spanish Mexico.",
+    #         "Spanish Neutral": "Translate the following English text to Spanish Neutral.",
+    #         "Spanish Spain": "Translate the following English text to Spanish Spain.",
+    #         "Portuguese": "Translate the following English text to Portuguese.",
+    #         "Italian": "Translate the following English text to Italian.",
+    #         "Japanese": "Translate the following English text to Japanese.",
+    #         "English Australia": "Translate the following English text to English Australia.",
+    #         "English US": "Translate the following English text to English US."
+    # }  
+
     language_prompts = {
-            "German": "Translate the following English text to German.",
-            "French": "Translate the following English text to French.",
-            "Spanish Mexico": "Translate the following English text to Spanish Mexico.",
-            "Spanish Neutral": "Translate the following English text to Spanish Neutral.",
-            "Spanish Spain": "Translate the following English text to Spanish Spain.",
-            "Portuguese": "Translate the following English text to Portuguese.",
-            "Italian": "Translate the following English text to Italian.",
-            "Japanese": "Translate the following English text to Japanese.",
-            "English Australia": "Translate the following English text to English Australia.",
-            "English US": "Translate the following English text to English US."
-    }  
+            "German": "Please translate the following text from English to German, ensuring accuracy and cultural relevance.",
+            "French": "Translate this English passage into French, considering regional linguistic variations where applicable.",
+            "Spanish Mexico": "Convert the below English text into Mexican Spanish, paying close attention to local expressions and idiomatic usage.",
+            "Spanish Neutral": "Translate the following English text into a neutral Spanish that is universally understood, while being mindful of idiomatic expressions.",
+            "Spanish Spain": "Please adapt the English content into Castilian Spanish, incorporating cultural and regional nuances specific to Spain.",
+            "Portuguese": "Translate the following English text into Portuguese, ensuring that regional differences are respected.",
+            "Italian": "Please render the following English passage into Italian, taking care to reflect the linguistic richness and regional variations of Italy.",
+            "Japanese": "Convert the English text below into Japanese, being mindful of the cultural context and nuances.",
+            "English Australia": "Translate the following English text into Australian English, incorporating local slang and expressions where appropriate.",
+            "English US": "Adapt the following English content into American English, considering regional variations and idiomatic usage."
+    }
+        
 
     with st.sidebar:
         openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys", value="******************")
