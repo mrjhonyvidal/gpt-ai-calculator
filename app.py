@@ -84,18 +84,18 @@ def main():
 
     # Language selection with Czech and Dutch added
     language_prompts = {
-        "German": "Please translate the following text from English to German, ensuring accuracy and cultural relevance. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
-        "French": "Translate this English passage into French, considering regional linguistic variations where applicable. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
-        "Spanish Mexico": "Convert the below English text into Mexican Spanish, paying close attention to local expressions and idiomatic usage. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
-        "Spanish Neutral": "Translate the following English text into a neutral Spanish that is universally understood, while being mindful of idiomatic expressions. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
-        "Spanish Spain": "Please adapt the English content into Castilian Spanish, incorporating cultural and regional nuances specific to Spain. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
-        "Portuguese": "Translate the following English text into Portuguese, ensuring that regional differences are respected. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
-        "Italian": "Please render the following English passage into Italian, taking care to reflect the linguistic richness and regional variations of Italy. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
-        "Japanese": "Convert the English text below into Japanese, being mindful of the cultural context and nuances. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
-        "English Australia": "Translate the following English text into Australian English, incorporating local slang and expressions where appropriate. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
-        "English US": "Adapt the following English content into American English, considering regional variations and idiomatic usage. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
-        "Czech": "Please translate the following text from English to Czech, ensuring cultural relevance and linguistic accuracy. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
-        "Dutch": "Please translate the following English text into Dutch, ensuring that the cultural context and linguistic accuracy are preserved. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text."
+        "German": "Please translate the following text from English to German, ensuring accuracy and cultural relevance. Pay special attention to business terms and maintain consistency in key concepts (like 'Membership'). Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "French": "Translate this English passage into French, considering regional linguistic variations where applicable. Pay special attention to business terms and key phrases. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Spanish Mexico": "Convert the below English text into Mexican Spanish, paying close attention to local expressions and idiomatic usage, especially for business terms (like 'Membership'). Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Spanish Neutral": "Translate the following English text into neutral Spanish that is universally understood, while being mindful of idiomatic expressions and key business terms. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Spanish Spain": "Please adapt the English content into Castilian Spanish, incorporating cultural and regional nuances specific to Spain. Pay attention to key business terms like 'Membership.' Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Portuguese": "Translate the following English text into Portuguese (Portugal or Brazil), ensuring regional differences are respected. Pay special attention to key business terms like 'Membership' to ensure proper meaning is maintained. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Italian": "Please render the following English passage into Italian, taking care to reflect the linguistic richness and regional variations of Italy. Pay special attention to business terms like 'Membership.' Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Japanese": "Convert the English text below into Japanese, being mindful of the cultural context and nuances. Ensure that key business terms like 'Membership' are translated appropriately. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "English Australia": "Translate the following English text into Australian English, incorporating local slang and expressions where appropriate. Ensure business terms like 'Membership' are retained or translated meaningfully. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "English US": "Adapt the following English content into American English, considering regional variations and idiomatic usage. Focus on preserving key business terminology like 'Membership.' Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Czech": "Please translate the following text from English to Czech, ensuring cultural relevance and linguistic accuracy, particularly for business terms like 'Membership.' Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Dutch": "Please translate the following English text into Dutch, ensuring that the cultural context and linguistic accuracy are preserved, especially for business terms like 'Membership.' Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text."
     }
     selected_language_to = st.selectbox("Select a Language", language_prompts.keys())
 
@@ -113,7 +113,7 @@ def main():
     # Translation rules
     st.markdown("#### Translation Rules")
     st.markdown("Define specific rules to override translation logic, such as terms to avoid or prefer.")
-    translation_rules = st.text_area("Translation Rules (Optional)", help="Specify rules to override the translation output.")
+    translation_rules = st.text_area("Translation Rules (Beta)", help="Specify rules to override the translation output.")
 
     # Prepare initial messages
     if "messages" not in st.session_state:
@@ -122,7 +122,7 @@ def main():
     # Construct the final prompt including tone and rules
     final_prompt = f"{language_prompts[selected_language_to]} {selected_tone_prompt}"
     if translation_rules:
-        final_prompt += f"\n\nPlease follow these translation rules: {translation_rules}."
+        final_prompt += f"\n\nPlease follow these instructions when translating: {translation_rules}."
 
     if st.session_state["messages"]:
         st.session_state["messages"][0]["content"] = final_prompt
