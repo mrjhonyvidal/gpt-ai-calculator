@@ -84,16 +84,18 @@ def main():
 
     # Language selection with Czech and Dutch added
     language_prompts = {
-        "German": "Please translate the following text from English to German, ensuring accuracy and cultural relevance.",
-        "French": "Translate this English passage into French, considering regional linguistic variations where applicable.",
-        "Spanish Mexico": "Convert the below English text into Mexican Spanish, paying close attention to local expressions and idiomatic usage.",
-        "Spanish Neutral": "Translate the following English text into a neutral Spanish that is universally understood, while being mindful of idiomatic expressions.",
-        "Spanish Spain": "Please adapt the English content into Castilian Spanish, incorporating cultural and regional nuances specific to Spain.",
-        "Portuguese": "Translate the following English text into Portuguese, ensuring that regional differences are respected.",
-        "Italian": "Please render the following English passage into Italian, taking care to reflect the linguistic richness and regional variations of Italy.",
-        "Japanese": "Convert the English text below into Japanese, being mindful of the cultural context and nuances.",
-        "English Australia": "Translate the following English text into Australian English, incorporating local slang and expressions where appropriate.",
-        "English US": "Adapt the following English content into American English, considering regional variations and idiomatic usage."
+        "German": "Please translate the following text from English to German, ensuring accuracy and cultural relevance. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "French": "Translate this English passage into French, considering regional linguistic variations where applicable. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Spanish Mexico": "Convert the below English text into Mexican Spanish, paying close attention to local expressions and idiomatic usage. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Spanish Neutral": "Translate the following English text into a neutral Spanish that is universally understood, while being mindful of idiomatic expressions. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Spanish Spain": "Please adapt the English content into Castilian Spanish, incorporating cultural and regional nuances specific to Spain. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Portuguese": "Translate the following English text into Portuguese, ensuring that regional differences are respected. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Italian": "Please render the following English passage into Italian, taking care to reflect the linguistic richness and regional variations of Italy. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Japanese": "Convert the English text below into Japanese, being mindful of the cultural context and nuances. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "English Australia": "Translate the following English text into Australian English, incorporating local slang and expressions where appropriate. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "English US": "Adapt the following English content into American English, considering regional variations and idiomatic usage. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Czech": "Please translate the following text from English to Czech, ensuring cultural relevance and linguistic accuracy. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text.",
+        "Dutch": "Please translate the following English text into Dutch, ensuring that the cultural context and linguistic accuracy are preserved. Without any interpretation, recommendation, or suggestion. Focus solely on translating the content while maintaining cultural and linguistic accuracy with the entire text."
     }
     selected_language_to = st.selectbox("Select a Language", language_prompts.keys())
 
