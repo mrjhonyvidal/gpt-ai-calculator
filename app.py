@@ -73,7 +73,7 @@ def main():
     st.markdown("""
     ### Instructions:
     - **Language Selection**: Choose the language you want to translate your text into.
-    - **Tone Selection**: Set the tone for translation such as 'Documentation', 'Product Page', 'Email Marketing', etc.
+    - **Tone Selection**: Set the tone for translation such as 'Documentation', 'Product Page'.
     """)
 
     # Model selection
@@ -106,9 +106,7 @@ def main():
     # Modify the prompt based on the selected tone
     tone_prompts = {
         "Documentation/Instructions": "Translate the text with a formal and instructional tone.",
-        "Product Page": "Translate the text with a persuasive and customer-centric tone.",
-        "Email Marketing": "Translate the text with an engaging and informal tone.",
-        "General Translation": "Translate the text with a neutral tone."
+        "Product Page": "Translate the text with a persuasive and customer-centric tone."
     }
     selected_tone_prompt = tone_prompts[selected_tone]
 
