@@ -1,9 +1,6 @@
 import openai
 import streamlit as st
 import json
-import tiktoken
-from forex_python.converter import CurrencyRates
-
 
 class APIPricing:
     def __init__(self, model_name):
@@ -23,7 +20,6 @@ class APIPricing:
         total_cost = user_cost + assistant_cost
         return total_cost
 
-    # split text into USER and ASSISTANT parts
     def split_text(self):
         lines = self.text.split("\n")
         user_text = [""]
@@ -52,140 +48,89 @@ class APIPricing:
         tokens = encoding.encode(text)
         return len(tokens)
 
-
 def main():
-    # st.markdown("# GTP Calculator")
+    # Commented Ferrari-themed sidebar
+    """
+    st.sidebar.markdown(
+        '''
+        <style>
+            [data-testid="stSidebar"] {{
+                background-image: url('https://upload.wikimedia.org/wikipedia/commons/4/44/Ferrari-Logo.svg');
+                background-repeat: no-repeat;
+                padding-top: 80px;
+                background-position: center;
+                background-size: 60%;
+            }}
+        </style>
+        ''', unsafe_allow_html=True)
+    st.sidebar.title("Enzo")
+    """
 
-    # st.markdown("""
-    # For text input, use the following format to separate user and assistant dialogues:
+    # Title with Formula 1 race car icon
+    st.title("🏎️ Enzo")
 
-    # * Type "## USER" before the user's dialogue.
-    # * Type "## ASSISTANT" before the assistant's dialogue.
+    # Commented markdown instructions
+    st.markdown("""
+    ### Instructions:
+    - **Language Selection**: Choose the language you want to translate your text into.
+    - **Tone Selection**: Set the tone for translation such as 'Documentation', 'Product Page', 'Email Marketing', etc.
+    """)
 
-    # For example:
-    # ```
-    # ## USER
-    # Text Translated
-
-    # ## ASSISTANT
-    # "## USER", "You will be provided with a sentence in English, and your task is to translate it into French."
-    # ```
-    # """)
-
-    # input_type = st.radio("Input Type", ["Text", "File"])
-
-    # st.markdown(
-    #     f"""
-    #         <style>
-    #             [data-testid="stSidebar"] {{
-    #                 background-image: url(https://www.agoramodels.com/site/templates/images/logo.svg);
-    #                 background-repeat: no-repeat;
-    #                 padding-top: 80px;
-    #                 background-position: center;
-    #                 background-size: contain;
-    #             }}
-    #         </style>
-    #         """,
-    #     unsafe_allow_html=True,
-    # )
-
-    # if input_type == "Text":
-    #     input_text = st.text_area("Input Text")
-    # else:
-    #     input_file = st.file_uploader("Input File (It must be a .txt file)")
-
-    # model selection
+    # Model selection
     with open("api_pricing.json", "r") as f:
         data = json.load(f)
     model_names = data.keys()
     selected_model_name = st.selectbox("Select a GPT model", model_names)
 
-    # times = st.slider("How many times the API is used per day?", 1, 100, 10)
-
-    # calculate token count and cost
-    # if st.button("Calculate"):
-    #     try:
-    #         if input_type == "Text":
-    #             text = input_text
-    #         else:
-    #             text = input_file.read().decode("utf-8")
-
-    #         api_pricing = APIPricing(selected_model_name)
-    #         cost = api_pricing.calc_cost(text)
-    #         monthly_cost = cost * times * 30
-    #         c = CurrencyRates()
-    #         cost_gbp = c.convert("USD", "GBP", cost)
-    #         monthly_cost_gbp = c.convert("USD", "GBP", monthly_cost)
-
-    #         st.markdown(f"""
-    #         | Cost | Monthly Cost |
-    #         | --- | --- |
-    #         | {cost} USD | {monthly_cost} USD |
-    #         | {cost_gbp} GBP | {monthly_cost_gbp} GBP |
-    #         """)
-    #     except Exception as e:
-    #         st.error(f"An error occurred: {e}") 
-
-    # language_prompts = {
-    #         "German": "Translate the following English text to German.",
-    #         "French": "Translate the following English text to French.",
-    #         "Spanish Mexico": "Translate the following English text to Spanish Mexico.",
-    #         "Spanish Neutral": "Translate the following English text to Spanish Neutral.",
-    #         "Spanish Spain": "Translate the following English text to Spanish Spain.",
-    #         "Portuguese": "Translate the following English text to Portuguese.",
-    #         "Italian": "Translate the following English text to Italian.",
-    #         "Japanese": "Translate the following English text to Japanese.",
-    #         "English Australia": "Translate the following English text to English Australia.",
-    #         "English US": "Translate the following English text to English US."
-    # }  
-
+    # Language selection with Czech and Dutch added
     language_prompts = {
-            "German": "Please translate the following text from English to German, ensuring accuracy and cultural relevance.",
-            "French": "Translate this English passage into French, considering regional linguistic variations where applicable.",
-            "Spanish Mexico": "Convert the below English text into Mexican Spanish, paying close attention to local expressions and idiomatic usage.",
-            "Spanish Neutral": "Translate the following English text into a neutral Spanish that is universally understood, while being mindful of idiomatic expressions.",
-            "Spanish Spain": "Please adapt the English content into Castilian Spanish, incorporating cultural and regional nuances specific to Spain.",
-            "Portuguese": "Translate the following English text into Portuguese, ensuring that regional differences are respected.",
-            "Italian": "Please render the following English passage into Italian, taking care to reflect the linguistic richness and regional variations of Italy.",
-            "Japanese": "Convert the English text below into Japanese, being mindful of the cultural context and nuances.",
-            "English Australia": "Translate the following English text into Australian English, incorporating local slang and expressions where appropriate.",
-            "English US": "Adapt the following English content into American English, considering regional variations and idiomatic usage."
+        "German": "Please translate the following text from English to German, ensuring accuracy and cultural relevance.",
+        "French": "Translate this English passage into French, considering regional linguistic variations where applicable.",
+        "Spanish Mexico": "Convert the below English text into Mexican Spanish, paying close attention to local expressions and idiomatic usage.",
+        "Spanish Neutral": "Translate the following English text into a neutral Spanish that is universally understood, while being mindful of idiomatic expressions.",
+        "Spanish Spain": "Please adapt the English content into Castilian Spanish, incorporating cultural and regional nuances specific to Spain.",
+        "Portuguese": "Translate the following English text into Portuguese, ensuring that regional differences are respected.",
+        "Italian": "Please render the following English passage into Italian, taking care to reflect the linguistic richness and regional variations of Italy.",
+        "Japanese": "Convert the English text below into Japanese, being mindful of the cultural context and nuances.",
+        "English Australia": "Translate the following English text into Australian English, incorporating local slang and expressions where appropriate.",
+        "English US": "Adapt the following English content into American English, considering regional variations and idiomatic usage."
     }
-        
-
-    # with st.sidebar:
-    #     openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password", help="You can get your API key from https://platform.openai.com/account/api-keys", value="******************")
-
-    #     st.markdown("---")
-    #     st.markdown("v.0.1-beta")
-    #     # st.markdown("By [Warp Design](https://warp-design.co.uk/)")
-
-    st.title("AI Translator")
-    # with open("languages_.json", "r") as f:
-    #     lang = json.load(f)
-    # languages_available = lang.keys()
     selected_language_to = st.selectbox("Select a Language", language_prompts.keys())
 
+    # Tone selection for translations
+    tone_options = ["Documentation/Instructions", "Product Page", "Email Marketing", "General Translation"]
+    selected_tone = st.selectbox("Select Translation Tone", tone_options)
+
+    # Modify the prompt based on the selected tone
+    tone_prompts = {
+        "Documentation/Instructions": "Translate the text with a formal and instructional tone.",
+        "Product Page": "Translate the text with a persuasive and customer-centric tone.",
+        "Email Marketing": "Translate the text with an engaging and informal tone.",
+        "General Translation": "Translate the text with a neutral tone."
+    }
+    selected_tone_prompt = tone_prompts[selected_tone]
+
+    # Translation rules
+    st.markdown("#### Translation Rules")
+    st.markdown("Define specific rules to override translation logic, such as terms to avoid or prefer.")
+    translation_rules = st.text_area("Translation Rules (Optional)", help="Specify rules to override the translation output.")
+
+    # Prepare initial messages
     if "messages" not in st.session_state:
         st.session_state["messages"] = []
 
+    # Construct the final prompt including tone and rules
+    final_prompt = f"{language_prompts[selected_language_to]} {selected_tone_prompt}"
+    if translation_rules:
+        final_prompt += f"\n\nPlease follow these translation rules: {translation_rules}."
+
     if st.session_state["messages"]:
-        # Update the assistant prompt based on the selected language
-        st.session_state["messages"][0]["content"] = language_prompts[selected_language_to]
+        st.session_state["messages"][0]["content"] = final_prompt
     else:
-        initial_prompt = language_prompts[selected_language_to]
-        st.session_state["messages"].append({"role": "assistant", "content": initial_prompt})
+        st.session_state["messages"].append({"role": "assistant", "content": final_prompt})
 
-    if "messages" not in st.session_state:
-        initial_prompt = language_prompts[selected_language_to]
-        st.session_state["messages"] = [
-                {"role": "assistant", "content":initial_prompt},
-            ]
-
-    for msg in st.session_state.messages:
-        st.chat_message(msg["role"]).write(msg["content"])
-
-    if prompt := st.chat_input():
+    # Handle user input and generate translation
+    if prompt := st.chat_input("Enter text to translate or provide instructions"):
         openai_api_key = st.secrets["OPENAI_TOKEN"]
         if not openai_api_key:
             st.info("Please add your OpenAI API key to continue.")
@@ -195,23 +140,23 @@ def main():
             openai.api_key = openai_api_key
             st.session_state.messages.append({"role": "user", "content": prompt})
             st.chat_message("user").write(prompt)
-            response = openai.chat.completions.create(model=selected_model_name, messages=st.session_state.messages)
 
-            ## TO-DO: add hyperparameters to the API call
-            # response = openai.ChatCompletion.create(
-            #     model=selected_model_name,
-            #     messages=st.session_state.messages,
-            #     max_tokens=150,
-            #     temperature=0.7,
-            #     top_p=1,
-            #     frequency_penalty=0,
-            #     presence_penalty=0,
-            #     stop=["## ASSISTANT"]
-            # )
+            # Make the OpenAI API call with hyperparameters for optimal translation
+            response = openai.chat.completions.create(
+                model=selected_model_name,
+                messages=st.session_state.messages,
+                max_tokens=2000,  # Set high token limit for larger translations
+                temperature=0.7,  # Adjust temperature for creativity balance
+                top_p=1,  # Use top-p sampling
+                frequency_penalty=0.0,  # Reduce repeating words
+                presence_penalty=0.0  # Encourage new topics
+            )
 
+            # Access the response content
             msg = response.choices[0].message.content
             st.session_state.messages.append({"role": "assistant", "content": msg})
             st.chat_message("assistant").write(msg)
+
         except Exception as e:
             st.error(f"An error occurred: {e}")
 

@@ -1,4 +1,10 @@
-# GPT API Price Calculator
+# GPT Translator Tool & Tokens Calculator
+
+## Run te Application
+
+`streamlit run app.py`
+
+## Models
 
 Here's a reference pricing for the available GPT models:
 
