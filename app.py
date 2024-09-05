@@ -100,7 +100,7 @@ def main():
     selected_language_to = st.selectbox("Select a Language", language_prompts.keys())
 
     # Tone selection for translations
-    tone_options = ["Documentation/Instructions", "Product Page", "Email Marketing", "General Translation"]
+    tone_options = ["Documentation/Instructions", "Product Page"]
     selected_tone = st.selectbox("Select Translation Tone", tone_options)
 
     # Modify the prompt based on the selected tone
